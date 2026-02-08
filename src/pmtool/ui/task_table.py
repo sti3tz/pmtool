@@ -116,7 +116,7 @@ class TaskTableWidget(QWidget):
 
     def _refresh_tasks(self) -> None:
         """Aktualisiert die Task-Anzeige."""
-        if not self._current_project:
+        if self._current_project is None or self._current_project.id is None:
             return
 
         self.table.setRowCount(0)
@@ -205,7 +205,7 @@ class TaskTableWidget(QWidget):
 
     def _on_add_clicked(self) -> None:
         """Wird beim Klick auf 'Task' aufgerufen."""
-        if not self._current_project:
+        if self._current_project is None or self._current_project.id is None:
             return
 
         dialog = TaskDialog(self, self._current_project)
@@ -221,7 +221,7 @@ class TaskTableWidget(QWidget):
     def _on_edit_clicked(self) -> None:
         """Wird beim Klick auf 'Bearbeiten' aufgerufen."""
         task = self._get_selected_task()
-        if not task or not self._current_project:
+        if task is None or self._current_project is None:
             return
 
         dialog = TaskDialog(self, self._current_project, task)

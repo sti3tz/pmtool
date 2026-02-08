@@ -138,7 +138,7 @@ class MainWindow(QMainWindow):
 
     def _update_gantt(self) -> None:
         """Aktualisiert die Gantt-Ansicht."""
-        if self._current_project:
+        if self._current_project is not None and self._current_project.id is not None:
             tasks = self.task_service.get_tasks_by_project(self._current_project.id)
             self.gantt_widget.set_tasks(tasks, self._current_project)
 
