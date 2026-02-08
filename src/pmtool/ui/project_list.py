@@ -27,9 +27,9 @@ class ProjectListWidget(QWidget):
         export_requested: Wird ausgelöst, wenn ein Export angefordert wird
     """
 
-    project_selected = Signal(Project)
+    project_selected = Signal(object)
     project_deleted = Signal(int)
-    export_requested = Signal(Project)
+    export_requested = Signal(object)
 
     def __init__(self, project_service: ProjectService) -> None:
         """Initialisiert das Projektlisten-Widget.
@@ -40,8 +40,13 @@ class ProjectListWidget(QWidget):
         super().__init__()
         self.project_service = project_service
         self._projects: dict[int, Project] = {}
+        self._on_project_selected_callback = None
         self._setup_ui()
         self._connect_signals()
+
+    def set_project_selected_callback(self, callback) -> None:
+        """Setzt einen Callback für Projektauswahl (alternativ zum Signal)."""
+        self._on_project_selected_callback = callback
 
     def _setup_ui(self) -> None:
         """Richtet die Benutzeroberfläche ein."""
@@ -79,6 +84,7 @@ class ProjectListWidget(QWidget):
         self.delete_button.clicked.connect(self._on_delete_clicked)
         self.export_button.clicked.connect(self._on_export_clicked)
         self.list_widget.currentItemChanged.connect(self._on_selection_changed)
+        self.list_widget.itemClicked.connect(self._on_item_clicked)
         self.list_widget.itemDoubleClicked.connect(self._on_edit_clicked)
 
     def refresh(self) -> None:
@@ -136,10 +142,22 @@ class ProjectListWidget(QWidget):
         self.export_button.setEnabled(has_selection)
 
         if current:
-            project_id = current.data(256)
+            self._emit_project_selected(current)
+
+    def _on_item_clicked(self, item: QListWidgetItem) -> None:
+        """Wird bei Klick auf ein Item aufgerufen."""
+        self._emit_project_selected(item)
+
+    def _emit_project_selected(self, item: QListWidgetItem) -> None:
+        """Emittiert das project_selected Signal für das gegebene Item."""
+        if item:
+            project_id = item.data(256)
             project = self._projects.get(project_id)
             if project:
                 self.project_selected.emit(project)
+                # Direkter Callback als Fallback
+                if self._on_project_selected_callback:
+                    self._on_project_selected_callback(project)
 
     def _on_add_clicked(self) -> None:
         """Wird beim Klick auf 'Neu' aufgerufen."""

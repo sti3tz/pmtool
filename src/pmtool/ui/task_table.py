@@ -208,6 +208,7 @@ class TaskTableWidget(QWidget):
     def _on_add_clicked(self) -> None:
         """Wird beim Klick auf 'Task' aufgerufen."""
         if self._current_project is None or self._current_project.id is None:
+            QMessageBox.warning(self, "Fehler", "Kein Projekt ausgewählt.")
             return
 
         dialog = TaskDialog(self, self._current_project)
@@ -217,8 +218,8 @@ class TaskTableWidget(QWidget):
                 self.task_service.create_task(self._current_project.id, **data)
                 self._refresh_tasks()
                 self.tasks_changed.emit()
-            except ValueError as e:
-                QMessageBox.warning(self, "Fehler", str(e))
+            except Exception as e:
+                QMessageBox.warning(self, "Fehler", f"Task konnte nicht erstellt werden: {e}")
 
     def _on_edit_clicked(self) -> None:
         """Wird beim Klick auf 'Bearbeiten' aufgerufen."""

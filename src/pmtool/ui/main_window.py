@@ -99,8 +99,9 @@ class MainWindow(QMainWindow):
 
     def _connect_signals(self) -> None:
         """Verbindet die Signale der Widgets."""
-        # Projekt ausgewählt
+        # Projekt ausgewählt - Signal und Callback für Fallback
         self.project_list.project_selected.connect(self._on_project_selected)
+        self.project_list.set_project_selected_callback(self._on_project_selected)
         self.project_list.project_deleted.connect(self._on_project_deleted)
         self.project_list.export_requested.connect(self._on_export_requested)
 
