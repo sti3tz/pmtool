@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 """Validierungsfunktionen für Eingabedaten."""
 
 from datetime import date

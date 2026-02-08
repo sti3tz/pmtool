@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 """Task Domain-Modell."""
 
 from dataclasses import dataclass, field

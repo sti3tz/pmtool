@@ -1,8 +1,9 @@
+from __future__ import annotations
+
 """Datenbank-Verbindungsmanagement und Schema-Migration."""
 
 import sqlite3
 from pathlib import Path
-from typing import Self
 
 # Aktuelles Schema-Version
 SCHEMA_VERSION = 1
@@ -69,7 +70,7 @@ class Database:
         self.db_path = Path(db_path) if isinstance(db_path, str) else db_path
         self._connection: sqlite3.Connection | None = None
 
-    def __enter__(self) -> Self:
+    def __enter__(self) -> "Database":
         """Context Manager Entry - öffnet die Datenbankverbindung."""
         self.connect()
         return self

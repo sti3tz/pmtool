@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 """Widget für die Projektliste."""
 
 from PySide6.QtCore import Signal

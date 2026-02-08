@@ -1,9 +1,9 @@
 """Enumerationen für Task-Status und -Priorität."""
 
-from enum import StrEnum
+from enum import Enum
 
 
-class TaskStatus(StrEnum):
+class TaskStatus(str, Enum):
     """Status eines Tasks im Lebenszyklus."""
 
     TODO = "TODO"
@@ -24,7 +24,7 @@ class TaskStatus(StrEnum):
         return names[self]
 
 
-class TaskPriority(StrEnum):
+class TaskPriority(str, Enum):
     """Prioritätsstufen eines Tasks."""
 
     LOW = "LOW"

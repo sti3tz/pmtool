@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 """Service für Task-bezogene Geschäftslogik."""
 
 from datetime import date

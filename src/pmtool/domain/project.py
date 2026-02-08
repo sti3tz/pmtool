@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 """Project Domain-Modell."""
 
 from dataclasses import dataclass, field

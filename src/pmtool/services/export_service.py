@@ -1,5 +1,7 @@
 """Service für Export-Funktionalität."""
 
+from __future__ import annotations
+
 import csv
 from pathlib import Path
 

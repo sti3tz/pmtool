@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 """Dialog für Task-Erstellung und -Bearbeitung."""
 
 from datetime import date

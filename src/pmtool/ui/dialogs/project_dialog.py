@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 """Dialog für Projekt-Erstellung und -Bearbeitung."""
 
 from datetime import date

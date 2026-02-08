@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 """Widget für die Task-Tabelle."""
 
 from PySide6.QtCore import Qt, Signal

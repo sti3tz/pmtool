@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 """Repository für Task-Persistenz."""
 
 from datetime import date

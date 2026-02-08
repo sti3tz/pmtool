@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 """Widget für die Gantt-Darstellung."""
 
 from datetime import date, timedelta

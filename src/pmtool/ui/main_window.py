@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 """Hauptfenster der Anwendung."""
 
 from PySide6.QtCore import Qt
